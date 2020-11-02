@@ -1,4 +1,4 @@
-class Launcher{
+ class Launcher{
     constructor(bodyA, pointB){
         var options = {
             bodyA: bodyA,
@@ -6,20 +6,26 @@ class Launcher{
             stiffness: 0.04,
             length: 10
         }
-        this.Launcher = Constraint.create(options);
+        this.body = Constraint.create(options);
         this.pointB = pointB
-        World.add(world, this.Launcher);
+        World.add(world, this.body);
     }
+
     display(){
-        var pointA = this.Launcher.bodyA.position;
-        var pointB = this.pointB;
-        strokeWeight(4);
-        line(pointA.x, pointA.y, pointB.x, pointB.y);
+        if(this.body.bodyA){
+            var pointA = this.body.bodyA.position;
+            var pointB = this.pointB;
+            strokeWeight(4);
+            line(pointA.x, pointA.y, pointB.x, pointB.y);
+        }
+        
     }
+
     fly(){
-        this.Launcher.bodyA = null
+        this.body.bodyA = null
     }
+
     attach(body){
-        this.Launcher.bodyA = body;
+        this.body.bodyA = body;
     }
 }
